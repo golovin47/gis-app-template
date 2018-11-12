@@ -1,0 +1,61 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion Version.compileSdkVersion
+    defaultConfig {
+        applicationId "com.gis.jetpackplayground"
+        minSdkVersion Version.minSdk
+        targetSdkVersion Version.targetSdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(":data")
+    implementation project(":domain")
+    implementation Deps.kotlinStdlib
+    implementation Deps.androidKtx
+    implementation Deps.appCompat
+    implementation Deps.constraintLayout
+
+    implementation Deps.rxJava
+    implementation Deps.rxKotlin
+    implementation Deps.rxRelay
+    implementation Deps.rxAndroid
+    implementation Deps.rxBindingKotlin
+    implementation Deps.rxBindingDesignKotlin
+    implementation Deps.rxBindingAppCompatV7Kotlin
+
+    implementation Deps.lifecycle
+
+    implementation Deps.navigationFragment
+    implementation Deps.navigationUI
+
+    implementation Deps.room
+    kapt Deps.roomCompiler
+
+    implementation Deps.koinCore
+    implementation Deps.koinAndroid
+    implementation Deps.koinCoreScope
+    implementation Deps.koinAndroidViewModel
+
+    testImplementation Deps.jUnit
+    androidTestImplementation Deps.androidTestRunner
+    androidTestImplementation Deps.espresso
+}
