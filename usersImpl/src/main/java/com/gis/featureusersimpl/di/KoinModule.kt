@@ -7,12 +7,5 @@ import org.koin.dsl.module.module
 
 val usersModule = module {
 
-  viewModel {
-    PeopleViewModel(
-      get("getPeople"),
-      get("refreshPeople"),
-      get("searchPeople"),
-      get("insertPeople")
-    )
-  }
+    viewModel { PeopleViewModel(get(), get(), get(), get()) }
 }

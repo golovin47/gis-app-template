@@ -3,6 +3,7 @@ package com.gis.jetpackplayground.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.gis.featureusersimpl.presentation.ui.peoplescreen.PeopleFragment
 import com.gis.jetpackplayground.R
 import com.gis.jetpackplayground.databinding.ActivityMainBinding
 
@@ -13,6 +14,5 @@ class MainActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
-
   }
 }

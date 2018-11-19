@@ -1,6 +1,11 @@
 package com.gis.repoimpl.di
 
 import androidx.room.Room
+import androidx.room.RoomDatabase
+import com.gis.repoapi.interactors.GetPeopleUseCase
+import com.gis.repoapi.interactors.InsertPeopleUseCase
+import com.gis.repoapi.interactors.RefreshPeopleUseCase
+import com.gis.repoapi.interactors.SearchPeopleByNameUseCase
 import com.gis.repoimpl.domain.datasource.DataSource
 import com.gis.repoimpl.domain.repository.PeopleRepository
 import com.gis.repoimpl.data.local.datasource.LocalSource
@@ -12,35 +17,38 @@ import com.gis.repoimpl.domain.interactors.RefreshPeopleUseCaseImpl
 import com.gis.repoimpl.domain.interactors.SearchPeopleByNameUseCaseImpl
 import com.gis.repoimpl.data.repository.PeopleRepositoryImpl
 import org.koin.android.ext.koin.androidApplication
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module.module
 
 val repoModule = module {
 
-  single {
-    Room.databaseBuilder(androidApplication(), JetPackDb::class.java, "JetPackDb")
-      .allowMainThreadQueries()
-      .build()
-  }
+    single("DB") {
+        Room.databaseBuilder(androidContext(), JetPackDb::class.java, "JetPackDb")
+            .allowMainThreadQueries()
+            .build()
+    }
 
-  single<DataSource>("local") { LocalSource(get()) }
+    single { get<JetPackDb>("DB").peopleDao() }
 
-  single<DataSource>("remote") { RemoteSource() }
+    single<DataSource>("local") { LocalSource(get()) }
 
-  single<PeopleRepository> {
-    PeopleRepositoryImpl(
-      get("local"),
-      get("remote")
-    )
-  }
+    single<DataSource>("remote") { RemoteSource() }
+
+    single<PeopleRepository> {
+        PeopleRepositoryImpl(
+            get("local"),
+            get("remote")
+        )
+    }
 }
 
 val interactorsModule = module {
 
-  factory { GetPeopleUseCaseImpl(get()) }
+    factory<GetPeopleUseCase> { GetPeopleUseCaseImpl(get()) }
 
-  factory { RefreshPeopleUseCaseImpl(get()) }
+    factory<RefreshPeopleUseCase> { RefreshPeopleUseCaseImpl(get()) }
 
-  factory { InsertPeopleUseCaseImpl(get()) }
+    factory<InsertPeopleUseCase> { InsertPeopleUseCaseImpl(get()) }
 
-  factory { SearchPeopleByNameUseCaseImpl(get()) }
+    factory<SearchPeopleByNameUseCase> { SearchPeopleByNameUseCaseImpl(get()) }
 }
