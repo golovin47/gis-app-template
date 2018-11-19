@@ -21,7 +21,7 @@ object Version {
     const val constraintLayout = "2.0.0-alpha2"
 
     // kotlin
-    const val kotlin = "1.3.0" // https://kotlinlang.org/
+    const val kotlin = "1.3.10" // https://kotlinlang.org/
     const val coroutinesAndroid = "1.0.1" // https://kotlinlang.org/
 
     //rxExtensions

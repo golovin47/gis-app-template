@@ -1,1 +1,9 @@
-include ':presentation', ':data', ':domain'
+include ':app', ':utils',
+        ':startscreenApi',
+        ':startscreenImpl',
+        ':loginApi',
+        ':loginImpl',
+        ':repoApi',
+        ':repoImpl',
+        ':usersApi',
+        ':usersImpl'

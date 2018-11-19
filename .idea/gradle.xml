@@ -8,10 +8,17 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
-            <option value="$PROJECT_DIR$/data" />
-            <option value="$PROJECT_DIR$/domain" />
-            <option value="$PROJECT_DIR$/presentation" />
+            <option value="$PROJECT_DIR$/loginApi" />
+            <option value="$PROJECT_DIR$/loginImpl" />
+            <option value="$PROJECT_DIR$/repoApi" />
+            <option value="$PROJECT_DIR$/repoImpl" />
+            <option value="$PROJECT_DIR$/startscreenApi" />
+            <option value="$PROJECT_DIR$/startscreenImpl" />
+            <option value="$PROJECT_DIR$/usersApi" />
+            <option value="$PROJECT_DIR$/usersImpl" />
+            <option value="$PROJECT_DIR$/utils" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

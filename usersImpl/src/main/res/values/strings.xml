@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FeatureUsersImpl</string>
+    <string name="people_screen_title">People Screen</string>
+    <string name="title_search">Search</string>
+</resources>
