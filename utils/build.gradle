@@ -33,6 +33,7 @@ dependencies {
     implementation Deps.appCompat
 
     implementation Deps.rxJava
+    implementation Deps.rxRelay
     implementation Deps.rxKotlin
     implementation Deps.rxAndroid
 

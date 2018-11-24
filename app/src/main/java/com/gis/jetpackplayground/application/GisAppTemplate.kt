@@ -5,10 +5,8 @@ import com.gis.featureusersimpl.di.usersModule
 import com.gis.repoimpl.di.interactorsModule
 import com.gis.repoimpl.di.repoModule
 import org.koin.android.ext.android.startKoin
-import org.koin.android.ext.koin.with
-import org.koin.standalone.StandAloneContext.loadKoinModules
 
-class JetPackApp : Application() {
+class GisAppTemplate : Application() {
 
   override fun onCreate() {
     super.onCreate()

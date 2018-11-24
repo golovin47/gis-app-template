@@ -4,21 +4,23 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 
 abstract class BaseViewModel<State, StateChange> : ViewModel() {
 
   private val states = MutableLiveData<State>()
-  private var disposable: Disposable? = null
+  private var intentsDisposable: Disposable? = null
 
   protected abstract fun initState(): State
 
   fun handleIntents(intentStream: Observable<*>) {
-    if (disposable == null)
-      disposable = Observable.merge(vmIntents(), viewIntents(intentStream))
+    if (intentsDisposable == null)
+      intentsDisposable = Observable.merge(vmIntents(), viewIntents(intentStream))
         .scan(initState()) { previousState, stateChanges ->
           reduceState(previousState, stateChanges)
         }
+        .observeOn(AndroidSchedulers.mainThread())
         .subscribe { state -> states.value = state }
   }
 
@@ -30,7 +32,12 @@ abstract class BaseViewModel<State, StateChange> : ViewModel() {
 
   fun stateReceived(): LiveData<State> = states
 
-  override fun onCleared() {
-    disposable?.dispose()
+  private fun disposeIntents() {
+    intentsDisposable?.dispose()
   }
+
+  override fun onCleared() {
+    disposeIntents()
+  }
+
 }

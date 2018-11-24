@@ -3,7 +3,7 @@
           package="com.gis.jetpackplayground">
 
     <application
-            android:name=".application.JetPackApp"
+            android:name=".application.GisAppTemplate"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"

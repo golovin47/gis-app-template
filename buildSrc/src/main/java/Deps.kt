@@ -71,7 +71,7 @@ object Version {
 
     //profiling
     const val debugDb = "1.0.4"    //https://github.com/amitshekhariitbhu/Android-Debug-Database
-    const val leakCanary = "1.5.4" //https://github.com/square/leakcanary
+    const val leakCanary = "1.6.2" //https://github.com/square/leakcanary
 
     //social auth
     const val facebookAnalytics = "[4,5)"
@@ -205,6 +205,7 @@ object Deps {
     const val debugDb = "com.amitshekhar.android:debug-db:${Version.debugDb}"
     const val leakCanaryDebug = "com.squareup.leakcanary:leakcanary-android:${Version.leakCanary}"
     const val leakCanaryRelease = "com.squareup.leakcanary:leakcanary-android-no-op:${Version.leakCanary}"
+    const val leakCanaryFragment = "com.squareup.leakcanary:leakcanary-support-fragment:${Version.leakCanary}"
 
     // Social auth
     const val googleAuth = "com.google.android.gms:play-services-auth:${Version.googleAuth}"
