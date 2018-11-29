@@ -34,20 +34,11 @@ class PeopleAdapter(
   }
 
   override fun onItemMove(from: Int, to: Int) {
-    itemMovedPublisher.onNext(
-      PeopleIntent.ItemMoved(
-        from,
-        to
-      )
-    )
+    itemMovedPublisher.onNext(PeopleIntent.ItemMoved(from, to))
   }
 
   override fun onItemDismiss(position: Int) {
-    itemDeletedPublisher.onNext(
-      PeopleIntent.ItemDeleted(
-        position
-      )
-    )
+    itemDeletedPublisher.onNext(PeopleIntent.ItemDeleted(position))
   }
 }
 
@@ -58,6 +49,3 @@ class PeopleViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     (view as TextView).text = people.name
   }
 }
-
-
-data class ItemMovedDTO(val from: Int, val to: Int)

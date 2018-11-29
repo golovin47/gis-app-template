@@ -63,7 +63,7 @@ object Version {
     const val lifecycle = "2.0.0-rc01" //https://developer.android.com/topic/libraries/architecture/lifecycle
 
     //navigation
-    const val navigation = "1.0.0-alpha04" //https://developer.android.com/topic/libraries/architecture/navigation
+    const val navigation = "1.0.0-alpha07" //https://developer.android.com/topic/libraries/architecture/navigation
 
     //imageLoading
     const val glide = "4.8.0"  //https://github.com/bumptech/glide
@@ -110,8 +110,6 @@ object Deps {
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Version.constraintLayout}"
     const val cardview = "androidx.cardview:cardview:${Version.androidX}"
     const val multidex = "androidx.multidex:multidex:${Version.multidex}"
-    const val navController = "android.arch.navigation:navigation-fragment:${Version.navigation}"
-    const val navControllerUi = "android.arch.navigation:navigation-ui:${Version.navigation}"
 
     const val androidKtx = "androidx.core:core-ktx:${Version.androidKtx}"
     const val paletteKtx = "androidx.palette:palette-ktx:${Version.androidKtx}"

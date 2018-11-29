@@ -12,6 +12,8 @@
             <option value="$PROJECT_DIR$/buildSrc" />
             <option value="$PROJECT_DIR$/loginApi" />
             <option value="$PROJECT_DIR$/loginImpl" />
+            <option value="$PROJECT_DIR$/navigationApi" />
+            <option value="$PROJECT_DIR$/navigationImpl" />
             <option value="$PROJECT_DIR$/repoApi" />
             <option value="$PROJECT_DIR$/repoImpl" />
             <option value="$PROJECT_DIR$/startscreenApi" />

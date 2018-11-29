@@ -1,4 +1,7 @@
-include ':app', ':utils',
+include ':app',
+        ':utils',
+        ':navigationApi',
+        ':navigationImpl',
         ':startscreenApi',
         ':startscreenImpl',
         ':loginApi',

@@ -17,8 +17,7 @@ class PeopleViewModel(
   private val insertPeopleUseCase: InsertPeopleUseCase
 ) : BaseViewModel<PeopleState, PeopleStateChange>() {
 
-  override fun initState(): PeopleState =
-    PeopleState()
+  override fun initState(): PeopleState = PeopleState()
 
   override fun vmIntents(): Observable<PeopleStateChange> =
     getPeopleUseCase.execute(true)

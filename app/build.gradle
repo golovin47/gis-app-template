@@ -35,6 +35,9 @@ dependencies {
     implementation project(':usersImpl')
     implementation project(':loginApi')
     implementation project(':loginImpl')
+    implementation project(':navigationApi')
+    implementation project(':navigationImpl')
+    implementation project(':utils')
 
     implementation Deps.kotlinStdlib
     implementation Deps.appCompat
@@ -42,6 +45,13 @@ dependencies {
     implementation Deps.rxJava
     implementation Deps.rxKotlin
     implementation Deps.rxAndroid
+
+    implementation Deps.navigationFragment
+    implementation Deps.navigationUI
+
+    implementation Deps.room
+    implementation Deps.rxRoom
+    kapt Deps.roomCompiler
 
     implementation Deps.koinCore
     implementation Deps.koinAndroid

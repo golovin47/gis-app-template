@@ -100,7 +100,7 @@ class PeopleFragment : Fragment() {
 
   @SuppressLint("CheckResult")
   private fun initIntents() {
-    val intents = Observable.merge(
+    Observable.merge(
       listOf(
 
         refreshPeoplePublisher,
@@ -114,8 +114,7 @@ class PeopleFragment : Fragment() {
         itemDeletedPublisher
       )
     )
-
-    vmPeople.handleIntents(intents)
+      .subscribe(vmPeople.viewIntentsConsumer())
   }
 
   private fun handleStates() {

@@ -3,6 +3,7 @@ package com.gis.utils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.jakewharton.rxrelay2.PublishRelay
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -10,18 +11,18 @@ import io.reactivex.disposables.Disposable
 abstract class BaseViewModel<State, StateChange> : ViewModel() {
 
   private val states = MutableLiveData<State>()
+  private val viewIntentsConsumer: PublishRelay<Any> = PublishRelay.create()
   private var intentsDisposable: Disposable? = null
 
   protected abstract fun initState(): State
 
-  fun handleIntents(intentStream: Observable<*>) {
-    if (intentsDisposable == null)
-      intentsDisposable = Observable.merge(vmIntents(), viewIntents(intentStream))
-        .scan(initState()) { previousState, stateChanges ->
-          reduceState(previousState, stateChanges)
-        }
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe { state -> states.value = state }
+  private fun handleIntents() {
+    intentsDisposable = Observable.merge(vmIntents(), viewIntents(viewIntentsConsumer))
+      .scan(initState()) { previousState, stateChanges ->
+        reduceState(previousState, stateChanges)
+      }
+      .observeOn(AndroidSchedulers.mainThread())
+      .subscribe { state -> states.value = state }
   }
 
   protected open fun vmIntents(): Observable<StateChange> = Observable.never()
@@ -30,14 +31,10 @@ abstract class BaseViewModel<State, StateChange> : ViewModel() {
 
   protected abstract fun reduceState(previousState: State, stateChange: StateChange): State
 
+  fun viewIntentsConsumer() = viewIntentsConsumer.also {
+    if (intentsDisposable == null)
+      handleIntents()
+  }
+
   fun stateReceived(): LiveData<State> = states
-
-  private fun disposeIntents() {
-    intentsDisposable?.dispose()
-  }
-
-  override fun onCleared() {
-    disposeIntents()
-  }
-
 }
