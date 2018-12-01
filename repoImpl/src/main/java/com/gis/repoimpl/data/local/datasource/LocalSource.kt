@@ -1,48 +1,38 @@
 package com.gis.repoimpl.data.local.datasource
 
+import com.gis.repoapi.entity.Cat
+import com.gis.repoimpl.data.local.db.CatsDao
+import com.gis.repoimpl.data.local.entity.CatL
 import com.gis.repoimpl.domain.datasource.DataSource
-import com.gis.repoapi.entity.People
-import com.gis.repoimpl.data.local.db.PeopleDao
-import com.gis.repoimpl.data.local.entity.PeopleL
 import io.reactivex.Completable
 import io.reactivex.Observable
 
-class LocalSource(private val peopleDao: PeopleDao) :
+class LocalSource(private val catsDao: CatsDao) :
   DataSource {
 
-  override fun getPeople(): Observable<List<People>> =
-    peopleDao.getAll()
+  override fun getPeople(page: Int, limit: Int): Observable<List<Cat>> =
+    catsDao.getAll()
       .map { if (it.isEmpty()) emptyList() else it.map { item -> item.toDomain() } }
       .toObservable()
 
-  override fun findByName(name: String): Observable<List<People>> =
-    peopleDao.findByName(name)
+  override fun findByName(name: String): Observable<List<Cat>> =
+    catsDao.findById(name)
       .map { if (it.isEmpty()) emptyList() else it.map { item -> item.toDomain() } }
       .toObservable()
 
-  override fun insertPeople(people: List<People>): Completable = Completable.fromAction {
-    peopleDao.insertAll(people.map { it.toLocal() })
+  override fun insertPeople(people: List<Cat>): Completable = Completable.fromAction {
+    catsDao.insertAll(people.map { it.toLocal() })
   }
 
-  private fun PeopleL.toDomain() =
-    com.gis.repoapi.entity.People(
+  private fun CatL.toDomain() =
+    Cat(
       id = id,
-      name = name,
-      metAt = metAt,
-      contact = contact,
-      email = email,
-      facebook = facebook,
-      twitter = twitter
+      url = url
     )
 
-  private fun People.toLocal() =
-    PeopleL(
+  private fun Cat.toLocal() =
+    CatL(
       id = id,
-      name = name,
-      metAt = metAt,
-      contact = contact,
-      email = email,
-      facebook = facebook,
-      twitter = twitter
+      url = url
     )
 }

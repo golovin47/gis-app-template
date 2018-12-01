@@ -6,7 +6,6 @@ apply plugin: "kotlin-kapt"
 android {
     compileSdkVersion 28
 
-
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
@@ -18,12 +17,31 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+        }
+
+        release {
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
+    flavorDimensions "default"
+
+    productFlavors {
+        stage {
+            dimension "default"
+            buildConfigField "String", "BASE_URL", '"https://api.thecatapi.com/"'
+            buildConfigField "String", "API_KEY", '"0cfc7c44-2fe0-4e7c-941d-3557696f7ac6"'
+        }
+
+        prod {
+            dimension "default"
+            buildConfigField "String", "BASE_URL", '"https://api.thecatapi.com/"'
+            buildConfigField "String", "API_KEY", '"0cfc7c44-2fe0-4e7c-941d-3557696f7ac6"'
+        }
+    }
 }
 
 dependencies {
@@ -38,6 +56,17 @@ dependencies {
     implementation Deps.rxJava
     implementation Deps.rxRelay
     implementation Deps.rxAndroid
+
+    implementation Deps.okHttp
+    implementation Deps.okHttpInteceptor
+
+    implementation Deps.retrofit
+    implementation Deps.retrofitRxJavaAdapter
+    implementation Deps.retrofitConverterLoganSquare
+
+    implementation Deps.loganSquare
+    kapt Deps.loganSquareCompiler
+    implementation Deps.jacksonCore
 
     implementation Deps.room
     implementation Deps.rxRoom

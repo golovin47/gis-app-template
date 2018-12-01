@@ -1,33 +1,33 @@
 package com.gis.repoimpl.domain.interactors
 
-import com.gis.repoapi.entity.People
-import com.gis.repoapi.interactors.GetPeopleUseCase
-import com.gis.repoapi.interactors.InsertPeopleUseCase
-import com.gis.repoapi.interactors.RefreshPeopleUseCase
-import com.gis.repoapi.interactors.SearchPeopleByNameUseCase
+import com.gis.repoapi.entity.Cat
+import com.gis.repoapi.interactors.GetCatsUseCase
+import com.gis.repoapi.interactors.InsertCatsUseCase
+import com.gis.repoapi.interactors.RefreshCatsUseCase
+import com.gis.repoapi.interactors.SearchCatsByNameUseCase
 import com.gis.repoimpl.domain.repository.PeopleRepository
 import io.reactivex.Observable
 
-class InsertPeopleUseCaseImpl(private val repository: PeopleRepository) : InsertPeopleUseCase {
+class InsertCatsUseCaseImpl(private val repository: PeopleRepository) : InsertCatsUseCase {
 
-  override fun execute(request: List<People>) = repository.insertPeople(request)
+  override fun execute(request: List<Cat>) = repository.insertPeople(request)
 }
 
 
-class GetPeopleUseCaseImpl(private val repository: PeopleRepository) : GetPeopleUseCase {
+class GetCatsUseCaseImpl(private val repository: PeopleRepository) : GetCatsUseCase {
 
-  override fun execute(request: Any): Observable<List<People>> = repository.getPeople()
+  override fun execute(request: Any): Observable<List<Cat>> = repository.getPeople()
 }
 
 
-class RefreshPeopleUseCaseImpl(private val repository: PeopleRepository) : RefreshPeopleUseCase {
+class RefreshCatsUseCaseImpl(private val repository: PeopleRepository) : RefreshCatsUseCase {
 
   override fun execute(request: Any) = repository.refreshPeople()
 }
 
 
-class SearchPeopleByNameUseCaseImpl(private val repository: PeopleRepository) :
-  SearchPeopleByNameUseCase {
+class SearchCatsByNameUseCaseImpl(private val repository: PeopleRepository) :
+  SearchCatsByNameUseCase {
 
   override fun execute(request: String) = repository.findByName(request)
 }

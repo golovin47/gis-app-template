@@ -30,7 +30,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':startscreenApi')
     implementation project(':loginApi')
-    implementation project(':usersApi')
+    implementation project(':catsApi')
     implementation project(':utils')
 
     implementation Deps.kotlinStdlib

@@ -1,49 +1,28 @@
 package com.gis.repoimpl.data.remote.datasource
 
 import com.gis.repoimpl.domain.datasource.DataSource
-import com.gis.repoapi.entity.People
-import com.gis.repoimpl.data.remote.entity.PeopleR
+import com.gis.repoapi.entity.Cat
+import com.gis.repoimpl.data.remote.api.GisAppTemplateApi
+import com.gis.repoimpl.data.remote.entity.CatR
 import io.reactivex.Completable
 import io.reactivex.Observable
-import java.util.concurrent.TimeUnit
 
-class RemoteSource : DataSource {
+class RemoteSource(private val api: GisAppTemplateApi) : DataSource {
 
-    override fun getPeople(): Observable<List<People>> {
-        val people = mutableListOf<PeopleR>()
-        for (i in 0..100) {
-            people.add(
-                PeopleR(
-                    id = i,
-                    name = "John #$i",
-                    metAt = "09.09.200$i",
-                    contact = "Contact $i",
-                    email = "john$i@gmail.com",
-                    facebook = "John${i}FB",
-                    twitter = "John${i}Twitter"
-                )
-            )
-        }
+  override fun getPeople(page: Int, limit: Int): Observable<List<Cat>> =
+    api.getCats(page, limit)
+      .map { list -> if (list.isNotEmpty()) list.map { it.toDomain() } else emptyList() }
 
-        return Observable.just(people.map { it.toDomain() }.toList())
-            .delay(3000, TimeUnit.MILLISECONDS)
-    }
+  override fun findByName(name: String): Observable<List<Cat>> {
+    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+  }
 
-    override fun findByName(name:String): Observable<List<People>> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+  override fun insertPeople(people: List<Cat>): Completable =
+    Completable.fromAction { val i = 0 }
 
-    override fun insertPeople(people: List<People>): Completable =
-        Completable.fromAction { val i = 0 }
-
-    private fun PeopleR.toDomain() =
-        People(
-            id = id,
-            name = name,
-            metAt = metAt,
-            contact = contact,
-            email = email,
-            facebook = facebook,
-            twitter = twitter
-        )
+  private fun CatR.toDomain() =
+    Cat(
+      id = id ?: "",
+      url = url ?: ""
+    )
 }

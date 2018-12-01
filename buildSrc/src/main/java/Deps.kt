@@ -47,6 +47,7 @@ object Version {
     // serialization
     const val gson = "2.8.5"        //https://github.com/google/gson
     const val loganSquare = "1.3.7" //https://github.com/bluelinelabs/LoganSquare
+    const val jacksonCore = "2.9.7" //https://github.com/bluelinelabs/LoganSquare
 
     // retrofit
     const val retrofit = "2.4.0"                     //https://github.com/square/retrofit
@@ -180,6 +181,7 @@ object Deps {
     const val gson = "com.google.code.gson:gson:${Version.gson}"
     const val loganSquare = "com.bluelinelabs:logansquare:${Version.loganSquare}"
     const val loganSquareCompiler = "com.bluelinelabs:logansquare-compiler:${Version.loganSquare}"
+    const val jacksonCore = "com.fasterxml.jackson.core:jackson-core:${Version.loganSquare}"
 
     // Persistence
     const val room = "androidx.room:room-runtime:${Version.room}"

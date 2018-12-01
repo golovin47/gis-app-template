@@ -14,9 +14,29 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "default"
+
+    productFlavors {
+        stage {
+            dimension "default"
+            buildConfigField "String", "BASE_URL", '"https://api.thecatapi.com/"'
+            buildConfigField "String", "API_KEY", '"0cfc7c44-2fe0-4e7c-941d-3557696f7ac6"'
+        }
+
+        prod {
+            dimension "default"
+            buildConfigField "String", "BASE_URL", '"https://api.thecatapi.com/"'
+            buildConfigField "String", "API_KEY", '"0cfc7c44-2fe0-4e7c-941d-3557696f7ac6"'
         }
     }
 
@@ -31,8 +51,8 @@ dependencies {
     implementation project(':repoImpl')
     implementation project(':startscreenApi')
     implementation project(':startscreenImpl')
-    implementation project(':usersApi')
-    implementation project(':usersImpl')
+    implementation project(':catsApi')
+    implementation project(':catsImpl')
     implementation project(':loginApi')
     implementation project(':loginImpl')
     implementation project(':navigationApi')
@@ -49,9 +69,9 @@ dependencies {
     implementation Deps.navigationFragment
     implementation Deps.navigationUI
 
-    implementation Deps.room
-    implementation Deps.rxRoom
-    kapt Deps.roomCompiler
+    implementation Deps.glide
+    implementation Deps.glideOkHttp3
+    kapt Deps.glideCompiler
 
     implementation Deps.koinCore
     implementation Deps.koinAndroid

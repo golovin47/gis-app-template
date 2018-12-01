@@ -8,5 +8,5 @@ include ':app',
         ':loginImpl',
         ':repoApi',
         ':repoImpl',
-        ':usersApi',
-        ':usersImpl'
+        ':catsApi',
+        ':catsImpl'
