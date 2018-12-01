@@ -40,3 +40,6 @@ dependencies {
     androidTestImplementation Deps.androidTestRunner
     androidTestImplementation Deps.espresso
 }
+repositories {
+    mavenCentral()
+}

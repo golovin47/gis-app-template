@@ -1,1 +1,1 @@
-/Users/ivan/StudioProjects/GisAppTemplate/buildSrc/build/classes/kotlin/main/Deps.class:/Users/ivan/StudioProjects/GisAppTemplate/buildSrc/build/classes/kotlin/main/General.class:/Users/ivan/StudioProjects/GisAppTemplate/buildSrc/build/classes/kotlin/main/Version.class
+/Users/ivan/StudioProjects/gis-app-template/buildSrc/build/classes/kotlin/main/Deps.class:/Users/ivan/StudioProjects/gis-app-template/buildSrc/build/classes/kotlin/main/General.class:/Users/ivan/StudioProjects/gis-app-template/buildSrc/build/classes/kotlin/main/Version.class
