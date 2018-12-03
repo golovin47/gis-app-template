@@ -16,10 +16,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gis.featureusersimpl.R
 import com.gis.featureusersimpl.databinding.FragmentPeopleBinding
 import com.gis.featureusersimpl.presentation.ui.peoplescreen.CatsIntent.*
+import com.gis.utils.domain.ImageLoader
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.subjects.PublishSubject
+import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
 
@@ -59,9 +61,11 @@ class CatsFragment : Fragment() {
   }
 
   private fun initRecyclerView(context: Context) {
+    val imageLoader:ImageLoader = get()
     val adapter = PeopleAdapter(
       itemMovedPublisher,
-      itemDeletedPublisher
+      itemDeletedPublisher,
+      imageLoader
     )
     binding.rvPeople
       .apply {

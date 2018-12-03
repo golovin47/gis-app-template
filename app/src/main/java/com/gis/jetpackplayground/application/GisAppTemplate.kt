@@ -7,6 +7,7 @@ import com.gis.featureusersimpl.di.usersModule
 import com.gis.jetpackplayground.di.*
 import com.gis.navigationimpl.di.navigationModule
 import com.gis.repoimpl.di.repoModule
+import com.gis.utils.di.utilsModule
 import org.koin.android.ext.android.startKoin
 
 class GisAppTemplate : Application() {
@@ -18,7 +19,7 @@ class GisAppTemplate : Application() {
       this,
       listOf(
         loginModule, mainModule, navigationModule,
-        startScreenModule, repoModule, usersModule
+        startScreenModule, repoModule, usersModule, utilsModule
       )
     )
   }

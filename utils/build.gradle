@@ -37,6 +37,13 @@ dependencies {
     implementation Deps.rxKotlin
     implementation Deps.rxAndroid
 
+    implementation Deps.glide
+    kapt Deps.glideCompiler
+
+    implementation Deps.koinCore
+    implementation Deps.koinAndroid
+    implementation Deps.koinCoreScope
+
     testImplementation Deps.jUnit
     androidTestImplementation Deps.androidTestRunner
     androidTestImplementation Deps.espresso

@@ -1,18 +1,21 @@
 package com.gis.featureusersimpl.presentation.ui.peoplescreen
 
-import android.view.View
+import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.gis.featureusersimpl.R
+import com.gis.featureusersimpl.databinding.ItemCatsListBinding
 import com.gis.repoapi.entity.Cat
+import com.gis.utils.domain.ImageLoader
 import io.reactivex.subjects.Subject
 
 class PeopleAdapter(
   private val itemMovedPublisher: Subject<CatsIntent.ItemMoved>,
-  private val itemDeletedPublisher: Subject<CatsIntent.ItemDeleted>
+  private val itemDeletedPublisher: Subject<CatsIntent.ItemDeleted>,
+  private val imageLoader: ImageLoader
 ) : ListAdapter<Cat, PeopleViewHolder>(object : DiffUtil.ItemCallback<Cat>() {
 
   override fun areItemsTheSame(oldItem: Cat, newItem: Cat): Boolean = oldItem.id == newItem.id
@@ -21,12 +24,16 @@ class PeopleAdapter(
 
 }), ItemTouchHelperAdapter {
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PeopleViewHolder {
-    val tvName = TextView(parent.context).apply {
-      textSize = resources.getDimension(R.dimen.rv_text_size)
-    }
+  override fun onFailedToRecycleView(holder: PeopleViewHolder): Boolean = true
 
-    return PeopleViewHolder(tvName)
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PeopleViewHolder {
+    val binding = DataBindingUtil.inflate<ItemCatsListBinding>(
+      LayoutInflater.from(parent.context),
+      R.layout.item_cats_list,
+      parent,
+      false
+    )
+    return PeopleViewHolder(binding, imageLoader)
   }
 
   override fun onBindViewHolder(holder: PeopleViewHolder, position: Int) {
@@ -43,9 +50,11 @@ class PeopleAdapter(
 }
 
 
-class PeopleViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
+class PeopleViewHolder(val binding: ItemCatsListBinding, val imageLoader: ImageLoader) :
+  RecyclerView.ViewHolder(binding.root) {
 
   fun bind(cat: Cat) {
-    (view as TextView).text = cat.id
+    binding.tvCatId.text = cat.id
+    imageLoader.loadImg(binding.ivCatImg, cat.url)
   }
 }
