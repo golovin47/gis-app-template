@@ -10,5 +10,5 @@ val usersModule = module {
 
   factory<FeatureUsersStarter> { FeatureCatsStarterImpl(get()) }
 
-  viewModel { CatsViewModel(get(), get(), get(), get()) }
+  viewModel { CatsViewModel(get(), get(), get(), get(), get()) }
 }

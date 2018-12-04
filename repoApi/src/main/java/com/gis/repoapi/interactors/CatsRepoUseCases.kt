@@ -4,21 +4,15 @@ import com.gis.repoapi.entity.Cat
 import io.reactivex.Completable
 import io.reactivex.Observable
 
-interface InsertCatsUseCase {
+interface ObserveCatsUseCase {
 
-  fun execute(request: List<Cat>): Completable
+  fun execute(): Observable<List<Cat>>
 }
 
 
-interface GetCatsUseCase {
+interface LoadNextCatsPageUseCase {
 
-  fun execute(request: Any): Observable<List<Cat>>
-}
-
-
-interface RefreshCatsUseCase {
-
-  fun execute(request: Any): Completable
+  fun execute(page:Int): Completable
 }
 
 
@@ -26,3 +20,17 @@ interface SearchCatsByNameUseCase {
 
   fun execute(request: String): Observable<List<Cat>>
 }
+
+
+interface InsertCatsUseCase {
+
+  fun execute(request: List<Cat>): Completable
+}
+
+
+interface RefreshCatsUseCase {
+
+  fun execute(): Completable
+}
+
+

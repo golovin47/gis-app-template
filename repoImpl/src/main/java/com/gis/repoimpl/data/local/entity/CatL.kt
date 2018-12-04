@@ -5,7 +5,10 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class CatL(
-  @PrimaryKey
   var id: String = "",
   var url: String = ""
-)
+){
+
+  @PrimaryKey(autoGenerate = true)
+  var dbId: Int = 0
+}

@@ -10,7 +10,7 @@ import io.reactivex.Flowable
 @Dao
 interface CatsDao {
 
-  @Query("SELECT * FROM CatL ORDER BY id ASC")
+  @Query("SELECT * FROM CatL ORDER BY dbId ASC")
   fun getAll(): Flowable<List<CatL>>
 
   @Insert(onConflict = OnConflictStrategy.REPLACE)

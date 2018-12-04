@@ -72,6 +72,8 @@ dependencies {
     implementation Deps.rxRoom
     kapt Deps.roomCompiler
 
+    debugImplementation Deps.debugDb
+
     implementation Deps.koinCore
     implementation Deps.koinAndroid
     implementation Deps.koinCoreScope

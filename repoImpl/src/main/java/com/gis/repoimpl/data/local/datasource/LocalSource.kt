@@ -10,18 +10,21 @@ import io.reactivex.Observable
 class LocalSource(private val catsDao: CatsDao) :
   DataSource {
 
-  override fun getPeople(page: Int, limit: Int): Observable<List<Cat>> =
+  override fun observeCats(): Observable<List<Cat>> =
     catsDao.getAll()
       .map { if (it.isEmpty()) emptyList() else it.map { item -> item.toDomain() } }
       .toObservable()
+
+  override fun getNextCatsPage(page: Int, limit: Int): Observable<List<Cat>> =
+    throw UnsupportedOperationException("Local data source doesn't support getNextCatsPage()")
 
   override fun findByName(name: String): Observable<List<Cat>> =
     catsDao.findById(name)
       .map { if (it.isEmpty()) emptyList() else it.map { item -> item.toDomain() } }
       .toObservable()
 
-  override fun insertPeople(people: List<Cat>): Completable = Completable.fromAction {
-    catsDao.insertAll(people.map { it.toLocal() })
+  override fun insertCats(cats: List<Cat>): Completable = Completable.fromAction {
+    catsDao.insertAll(cats.map { it.toLocal() })
   }
 
   private fun CatL.toDomain() =

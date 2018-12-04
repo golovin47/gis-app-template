@@ -9,7 +9,10 @@ import io.reactivex.Observable
 
 class RemoteSource(private val api: GisAppTemplateApi) : DataSource {
 
-  override fun getPeople(page: Int, limit: Int): Observable<List<Cat>> =
+  override fun observeCats(): Observable<List<Cat>> =
+    throw UnsupportedOperationException("Remote data source doesn't support observeCats()")
+
+  override fun getNextCatsPage(page: Int, limit: Int): Observable<List<Cat>> =
     api.getCats(page, limit)
       .map { list -> if (list.isNotEmpty()) list.map { it.toDomain() } else emptyList() }
 
@@ -17,7 +20,7 @@ class RemoteSource(private val api: GisAppTemplateApi) : DataSource {
     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
 
-  override fun insertPeople(people: List<Cat>): Completable =
+  override fun insertCats(cats: List<Cat>): Completable =
     Completable.fromAction { val i = 0 }
 
   private fun CatR.toDomain() =

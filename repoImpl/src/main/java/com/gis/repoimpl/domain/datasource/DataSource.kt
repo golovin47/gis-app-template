@@ -5,10 +5,11 @@ import io.reactivex.Completable
 import io.reactivex.Observable
 
 interface DataSource {
+  fun observeCats(): Observable<List<Cat>>
 
-  fun getPeople(page: Int, limit: Int): Observable<List<Cat>>
+  fun getNextCatsPage(page: Int, limit: Int): Observable<List<Cat>>
 
   fun findByName(name:String): Observable<List<Cat>>
 
-  fun insertPeople(people: List<Cat>): Completable
+  fun insertCats(cats: List<Cat>): Completable
 }

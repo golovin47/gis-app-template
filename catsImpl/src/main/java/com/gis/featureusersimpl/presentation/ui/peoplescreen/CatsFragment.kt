@@ -27,6 +27,7 @@ import java.util.concurrent.TimeUnit
 
 class CatsFragment : Fragment() {
 
+  private val loadNextPagePublisher = PublishSubject.create<LoadNextPage>()
   private val searchByIdPublisher = PublishSubject.create<SearchById>()
   private val refreshCatsPublisher = PublishSubject.create<RefreshCats>()
   private val itemMovedPublisher = PublishSubject.create<ItemMoved>()
@@ -62,7 +63,8 @@ class CatsFragment : Fragment() {
 
   private fun initRecyclerView(context: Context) {
     val imageLoader:ImageLoader = get()
-    val adapter = PeopleAdapter(
+    val adapter = CatsAdapter(
+      loadNextPagePublisher,
       itemMovedPublisher,
       itemDeletedPublisher,
       imageLoader
@@ -106,6 +108,7 @@ class CatsFragment : Fragment() {
   private fun initIntents() {
     Observable.merge(
       listOf(
+        loadNextPagePublisher,
 
         refreshCatsPublisher,
 
@@ -131,6 +134,6 @@ class CatsFragment : Fragment() {
     if (state.error != null)
       Snackbar.make(view!!, state.error.message!!, Snackbar.LENGTH_SHORT).show()
 
-    (binding.rvPeople.adapter as PeopleAdapter).submitList(state.cats)
+    (binding.rvPeople.adapter as CatsAdapter).submitList(state.cats)
   }
 }
