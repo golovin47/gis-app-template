@@ -2,7 +2,7 @@ package com.gis.naviagationapi
 
 interface Navigator {
 
-  fun navigateToStartScreen()
-  fun navigateToLoginScreen()
-  fun navigateToUsersScreen()
+  fun navigateToStart()
+  fun navigateToLogin()
+  fun navigateToCats()
 }

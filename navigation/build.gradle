@@ -1,18 +1,23 @@
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android'
+apply plugin: "kotlin-kapt"
+apply plugin: "androidx.navigation.safeargs"
 
 android {
-    compileSdkVersion Version.compileSdkVersion
+    compileSdkVersion 28
+
+
     defaultConfig {
-        applicationId "com.gis.jetpackplayground"
-        minSdkVersion Version.minSdk
-        targetSdkVersion Version.targetSdk
+        minSdkVersion 21
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
+
     buildTypes {
         debug {
             minifyEnabled false
@@ -29,44 +34,34 @@ android {
     productFlavors {
         stage {
             dimension "default"
-            buildConfigField "String", "BASE_URL", '"https://api.thecatapi.com/"'
-            buildConfigField "String", "API_KEY", '"0cfc7c44-2fe0-4e7c-941d-3557696f7ac6"'
         }
 
         prod {
             dimension "default"
-            buildConfigField "String", "BASE_URL", '"https://api.thecatapi.com/"'
-            buildConfigField "String", "API_KEY", '"0cfc7c44-2fe0-4e7c-941d-3557696f7ac6"'
         }
     }
 
-    dataBinding {
-        enabled = true
-    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':repository')
-    implementation project(':featureStartScreen')
-    implementation project(':featureCats')
-    implementation project(':featureLogin')
-    implementation project(':navigation')
-    implementation project(':utils')
+    implementation project(":featureCats")
+    implementation project(":featureLogin")
+    implementation project(":featureStartScreen")
 
     implementation Deps.kotlinStdlib
+    implementation Deps.androidKtx
     implementation Deps.appCompat
 
     implementation Deps.rxJava
     implementation Deps.rxKotlin
+    implementation Deps.rxRelay
     implementation Deps.rxAndroid
+
+    implementation Deps.lifecycle
 
     implementation Deps.navigationFragment
     implementation Deps.navigationUI
-
-    implementation Deps.glide
-    implementation Deps.glideOkHttp3
-    kapt Deps.glideCompiler
 
     implementation Deps.koinCore
     implementation Deps.koinAndroid

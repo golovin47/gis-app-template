@@ -10,16 +10,11 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/buildSrc" />
-            <option value="$PROJECT_DIR$/catsApi" />
-            <option value="$PROJECT_DIR$/catsImpl" />
-            <option value="$PROJECT_DIR$/loginApi" />
-            <option value="$PROJECT_DIR$/loginImpl" />
-            <option value="$PROJECT_DIR$/navigationApi" />
-            <option value="$PROJECT_DIR$/navigationImpl" />
-            <option value="$PROJECT_DIR$/repoApi" />
-            <option value="$PROJECT_DIR$/repoImpl" />
-            <option value="$PROJECT_DIR$/startscreenApi" />
-            <option value="$PROJECT_DIR$/startscreenImpl" />
+            <option value="$PROJECT_DIR$/featureCats" />
+            <option value="$PROJECT_DIR$/featureLogin" />
+            <option value="$PROJECT_DIR$/featureStartScreen" />
+            <option value="$PROJECT_DIR$/navigation" />
+            <option value="$PROJECT_DIR$/repository" />
             <option value="$PROJECT_DIR$/utils" />
           </set>
         </option>

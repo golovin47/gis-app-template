@@ -1,12 +1,7 @@
 include ':app',
         ':utils',
-        ':navigationApi',
-        ':navigationImpl',
-        ':startscreenApi',
-        ':startscreenImpl',
-        ':loginApi',
-        ':loginImpl',
-        ':repoApi',
-        ':repoImpl',
-        ':catsApi',
-        ':catsImpl'
+        ':navigation',
+        ':featureStartScreen',
+        ':featureLogin',
+        ':repository',
+        ':featureCats'
