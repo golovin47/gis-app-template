@@ -2,5 +2,5 @@ package com.gis.featureusers
 
 interface FeatureUsersApi {
 
-  fun usersStarter(): FeatureUsersStarter
+  fun usersStarter(): FeatureCatsStarter
 }

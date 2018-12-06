@@ -1,6 +1,6 @@
 package com.gis.featureusers
 
-interface FeatureUsersStarter {
+interface FeatureCatsStarter {
 
   fun start()
 }

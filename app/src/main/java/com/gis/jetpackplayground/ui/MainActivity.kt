@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
   }
   private val startUsersScreen: () -> Unit by inject(name = "startUsersFeature")
 
-
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     binding = DataBindingUtil.setContentView(this, R.layout.activity_main)

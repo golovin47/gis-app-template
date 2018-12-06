@@ -37,4 +37,8 @@ abstract class BaseViewModel<State, StateChange> : ViewModel() {
   }
 
   fun stateReceived(): LiveData<State> = states
+
+  override fun onCleared() {
+    intentsDisposable?.dispose()
+  }
 }

@@ -2,13 +2,13 @@ package com.gis.navigationimpl
 
 import com.gis.featureloginapi.FeatureLoginStarter
 import com.gis.featurestartscreenapi.FeatureStartScreenStarter
-import com.gis.featureusers.FeatureUsersStarter
+import com.gis.featureusers.FeatureCatsStarter
 import com.gis.naviagationapi.Navigator
 
 class NavigatorImpl(
   private val startScreenStarter: FeatureStartScreenStarter,
   private val loginStarter: FeatureLoginStarter,
-  private val usersStarter: FeatureUsersStarter
+  private val catsStarter: FeatureCatsStarter
 ) : Navigator {
 
   override fun navigateToStartScreen() {
@@ -20,6 +20,6 @@ class NavigatorImpl(
   }
 
   override fun navigateToUsersScreen() {
-    usersStarter.start()
+    catsStarter.start()
   }
 }

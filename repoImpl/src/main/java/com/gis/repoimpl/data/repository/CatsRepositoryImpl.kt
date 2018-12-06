@@ -12,8 +12,7 @@ class CatsRepositoryImpl(
 ) :
   CatsRepository {
 
-  private val catsObservable: Observable<List<Cat>> = localSource.observeCats()
-    .share()
+  private val catsObservable: Observable<List<Cat>> = localSource.observeCats().share()
 
   override fun observeCats(): Observable<List<Cat>> = catsObservable
     .doOnNext { cats -> if (cats.isEmpty()) getPeopleFromRemote(1, 20).subscribe() }
