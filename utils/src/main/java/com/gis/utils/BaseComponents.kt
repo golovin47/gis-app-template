@@ -8,6 +8,16 @@ import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 
+interface BaseView<State> {
+
+  fun initIntents()
+
+  fun handleStates()
+
+  fun render(state: State)
+}
+
+
 abstract class BaseViewModel<State, StateChange> : ViewModel() {
 
   private val states = MutableLiveData<State>()

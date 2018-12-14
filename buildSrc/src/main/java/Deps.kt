@@ -14,7 +14,7 @@ object Version {
     const val androidGradle = "3.4.0-alpha03"
 
     // android
-    const val androidX = "1.0.0-rc02"
+    const val androidX = "1.0.0"
     const val androidKtx = "1.0.0-rc02"   //https://github.com/android/android-ktx
     const val androidLifecycle = "2.0.0-alpha1"
     const val multidex = "2.0.0"
@@ -111,6 +111,7 @@ object Deps {
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Version.constraintLayout}"
     const val cardview = "androidx.cardview:cardview:${Version.androidX}"
     const val multidex = "androidx.multidex:multidex:${Version.multidex}"
+    const val animatedVector = "androidx.vectordrawable:vectordrawable-animated:${Version.androidX}"
 
     const val androidKtx = "androidx.core:core-ktx:${Version.androidKtx}"
     const val paletteKtx = "androidx.palette:palette-ktx:${Version.androidKtx}"

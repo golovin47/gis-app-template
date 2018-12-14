@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gis.featureusersimpl.R
 import com.gis.featureusersimpl.databinding.FragmentPeopleBinding
 import com.gis.featureusersimpl.presentation.ui.peoplescreen.CatsIntent.*
+import com.gis.utils.BaseView
 import com.gis.utils.domain.ImageLoader
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.Observable
@@ -25,7 +26,7 @@ import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
 
-class CatsFragment : Fragment() {
+class CatsFragment : Fragment(), BaseView<CatsState> {
 
   private val loadNextPagePublisher = PublishSubject.create<LoadNextPage>()
   private val searchByIdPublisher = PublishSubject.create<SearchById>()
@@ -105,7 +106,7 @@ class CatsFragment : Fragment() {
   }
 
   @SuppressLint("CheckResult")
-  private fun initIntents() {
+  override fun initIntents() {
     Observable.merge(
       listOf(
         loadNextPagePublisher,
@@ -124,11 +125,11 @@ class CatsFragment : Fragment() {
       .subscribe(vmCats.viewIntentsConsumer())
   }
 
-  private fun handleStates() {
+  override fun handleStates() {
     vmCats.stateReceived().observe(this, Observer { state -> render(state) })
   }
 
-  private fun render(state: CatsState) {
+  override fun render(state: CatsState) {
     binding.srlRefreshPeople.isRefreshing = state.loading
 
     if (state.error != null)

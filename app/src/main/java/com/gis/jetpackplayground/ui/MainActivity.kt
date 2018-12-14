@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
   private lateinit var binding: ActivityMainBinding
   private var navigator: AppNavigator = get()
-  private val startUsersScreen: () -> Unit by inject(name = "startCatsFeature")
+  private val startStartScreenFeature: () -> Unit by inject(name = "startStartScreenFeature")
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     if (savedInstanceState == null) {
       val mainNavController = (supportFragmentManager.findFragmentById(R.id.main_nav_host) as NavHostFragment).navController
       navigator.setNavController(mainNavController)
-      startUsersScreen.invoke()
+      startStartScreenFeature.invoke()
     }
   }
 }

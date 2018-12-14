@@ -11,6 +11,7 @@ class AppNavigator {
   }
 
   fun navigateToStart() {
+    navController.setGraph(R.navigation.start_screen_nav_graph)
   }
 
   fun navigateToLogin() {
