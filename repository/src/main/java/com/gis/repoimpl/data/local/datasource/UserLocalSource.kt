@@ -10,13 +10,12 @@ import java.util.concurrent.TimeUnit
 
 class UserLocalSource(private val sharedPrefs: SharedPreferences) : UserDataSource {
 
-  override fun getUser(): Observable<User> = Observable.timer(3000, TimeUnit.MILLISECONDS)
-    .flatMap {
+  override fun getUser(): Observable<User> =
       Observable.fromCallable {
-        val userFields = sharedPrefs.getString("user", User.emptyUser.toString())!!.split(",")
+        val userFields =
+          sharedPrefs.getString("user", User.empty().toLocal().toString())!!.split(",")
         return@fromCallable User(id = userFields[0].toInt(), name = userFields[1])
       }
-    }
 
   override fun saveUser(user: User): Completable = Completable.fromAction {
     sharedPrefs.edit().putString("user", user.toLocal().toString()).apply()

@@ -21,4 +21,13 @@ class AppCoordinator(private val navigator: AppNavigator) {
       .build()
     navigator.navigateToCats(actionId = R.id.from_start_to_cats, navOptions = navOptions)
   }
+
+  fun goToMainFromLogin() {
+    val navOptions = NavOptions.Builder()
+      .setEnterAnim(R.anim.anim_fade_in)
+      .setExitAnim(R.anim.anim_fade_out)
+      .setPopUpTo(R.id.loginFragment, true)
+      .build()
+    navigator.navigateToCats(actionId = R.id.from_login_to_cats, navOptions = navOptions)
+  }
 }

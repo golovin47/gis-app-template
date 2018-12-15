@@ -1,4 +1,4 @@
-package com.gis.featurestartscreenimpl.presentation.ui.startscreen
+package com.gis.featurestartscreen.presentation.ui.startscreen
 
 import android.annotation.SuppressLint
 import android.graphics.drawable.Animatable
@@ -8,8 +8,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.gis.featurestartscreenimpl.R
-import com.gis.featurestartscreenimpl.databinding.FragmentStartScreenBinding
+import com.gis.featurestartscreen.R
+import com.gis.featurestartscreen.databinding.FragmentStartScreenBinding
 import com.gis.utils.BaseView
 import io.reactivex.Observable
 import org.koin.androidx.viewmodel.ext.android.viewModel

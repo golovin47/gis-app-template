@@ -17,10 +17,9 @@ class MainActivity : AppCompatActivity() {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
+
     initBinding()
-    if (savedInstanceState == null) {
-      initNavController()
-    }
+    initNavController()
   }
 
   private fun initBinding() {

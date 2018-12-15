@@ -1,4 +1,4 @@
-package com.gis.featureusersimpl.presentation.ui.peoplescreen
+package com.gis.featurecats.presentation.ui.catsscreen
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView

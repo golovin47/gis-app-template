@@ -1,6 +1,6 @@
-package com.gis.featureusersimpl.di
+package com.gis.featurecats.di
 
-import com.gis.featureusersimpl.presentation.ui.peoplescreen.CatsViewModel
+import com.gis.featurecats.presentation.ui.catsscreen.CatsViewModel
 import org.koin.androidx.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 

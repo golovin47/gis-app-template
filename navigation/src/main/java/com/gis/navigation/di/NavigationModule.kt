@@ -10,5 +10,6 @@ val navigationModule = module {
   single(createOnStart = true) { AppCoordinator(get()) }
 
   factory(name = "fromStartToLogin") { { get<AppCoordinator>().goToLoginFromStartScreen() } }
-  factory(name = "fromStartToCats") { { get<AppCoordinator>().goToMainFromStartScreen() } }
+  factory(name = "fromStartToMain") { { get<AppCoordinator>().goToMainFromStartScreen() } }
+  factory(name = "fromLoginToMain") { { get<AppCoordinator>().goToMainFromLogin() } }
 }

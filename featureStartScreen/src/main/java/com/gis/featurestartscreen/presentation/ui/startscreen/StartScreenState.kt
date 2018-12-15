@@ -1,4 +1,4 @@
-package com.gis.featurestartscreenimpl.presentation.ui.startscreen
+package com.gis.featurestartscreen.presentation.ui.startscreen
 
 class StartScreenState
 

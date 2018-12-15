@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/startScreenFragment"
-        android:name="com.gis.featurestartscreenimpl.presentation.ui.startscreen.StartScreenFragment"
+        android:name="com.gis.featurestartscreen.presentation.ui.startscreen.StartScreenFragment"
         android:label="StartScreenFragment"
         tools:layout="@layout/fragment_start_screen" >
 
@@ -35,7 +35,7 @@
 
     <fragment
         android:id="@+id/catsFragment"
-        android:name="com.gis.featureusersimpl.presentation.ui.peoplescreen.CatsFragment"
+        android:name="com.gis.featurecats.presentation.ui.catsscreen.CatsFragment"
         android:label="CatsFragment"
         tools:layout="@layout/fragment_cats" />
 

@@ -1,4 +1,4 @@
-package com.gis.featureusersimpl.presentation.ui.peoplescreen
+package com.gis.featurecats.presentation.ui.catsscreen
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,10 +6,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.gis.featureusersimpl.R
-import com.gis.featureusersimpl.databinding.ItemCatsListBinding
-import com.gis.featureusersimpl.databinding.ItemLoadingCatsListBinding
-import com.gis.featureusersimpl.presentation.ui.peoplescreen.CatsListItem.CatDefaultItem
+import com.gis.featurecats.R
+import com.gis.featurecats.databinding.ItemCatsListBinding
+import com.gis.featurecats.databinding.ItemLoadingCatsListBinding
+import com.gis.featurecats.presentation.ui.catsscreen.CatsListItem.CatDefaultItem
 import com.gis.utils.domain.ImageLoader
 import io.reactivex.subjects.Subject
 

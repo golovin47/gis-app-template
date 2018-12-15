@@ -1,4 +1,4 @@
-package com.gis.featureusersimpl.presentation.ui.peoplescreen
+package com.gis.featurecats.presentation.ui.catsscreen
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -13,9 +13,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.gis.featureusersimpl.R
-import com.gis.featureusersimpl.databinding.FragmentCatsBinding
-import com.gis.featureusersimpl.presentation.ui.peoplescreen.CatsIntent.*
+import com.gis.featurecats.R
+import com.gis.featurecats.databinding.FragmentCatsBinding
+import com.gis.featurecats.presentation.ui.catsscreen.CatsIntent.*
 import com.gis.utils.BaseView
 import com.gis.utils.domain.ImageLoader
 import com.google.android.material.snackbar.Snackbar
@@ -62,7 +62,7 @@ class CatsFragment : Fragment(), BaseView<CatsState> {
   }
 
   private fun initRecyclerView(context: Context) {
-    val imageLoader:ImageLoader = get()
+    val imageLoader: ImageLoader = get()
     val adapter = CatsAdapter(
       loadNextPagePublisher,
       itemMovedPublisher,
@@ -120,8 +120,7 @@ class CatsFragment : Fragment(), BaseView<CatsState> {
 
         itemDeletedPublisher
       )
-    )
-      .subscribe(vmCats.viewIntentsConsumer())
+    ).subscribe(vmCats.viewIntentsConsumer())
   }
 
   override fun handleStates() {

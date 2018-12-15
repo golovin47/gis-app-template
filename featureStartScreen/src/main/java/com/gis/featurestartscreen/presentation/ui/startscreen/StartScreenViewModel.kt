@@ -1,12 +1,13 @@
-package com.gis.featurestartscreenimpl.presentation.ui.startscreen
+package com.gis.featurestartscreen.presentation.ui.startscreen
 
-import com.gis.featurestartscreenimpl.presentation.ui.startscreen.StartScreenStateChange.*
+import com.gis.featurestartscreen.presentation.ui.startscreen.StartScreenStateChange.*
 import com.gis.repoimpl.domain.entitiy.User
 import com.gis.repoimpl.domain.interactors.ObserveUserUseCase
 import com.gis.utils.BaseViewModel
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
 class StartScreenViewModel(
   private val observeUserUseCase: ObserveUserUseCase,
@@ -19,7 +20,8 @@ class StartScreenViewModel(
 
   override fun vmIntents(): Observable<StartScreenStateChange> =
     observeUserUseCase.execute()
-      .map { user -> if (user == User.emptyUser) GoToLogin else GoToMain }
+      .delay(3000, TimeUnit.MILLISECONDS)
+      .map { user -> if (user == User.empty()) GoToLogin else GoToMain }
       .doOnNext { if (it is GoToLogin) goToLogin?.invoke() else goToMain?.invoke() }
       .doOnError { goToLogin?.invoke() }
       .onErrorResumeNext { e: Throwable -> Observable.just(Error(e)) }
