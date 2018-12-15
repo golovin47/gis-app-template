@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_nav_graph"
+    app:startDestination="@id/startScreenFragment">
+
+    <fragment
+        android:id="@+id/startScreenFragment"
+        android:name="com.gis.featurestartscreenimpl.presentation.ui.startscreen.StartScreenFragment"
+        android:label="StartScreenFragment"
+        tools:layout="@layout/fragment_start_screen" >
+
+        <action
+            android:id="@+id/from_start_to_login"
+            app:destination="@id/loginFragment"/>
+
+        <action
+            android:id="@+id/from_start_to_cats"
+            app:destination="@id/catsFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.gis.featureloginscreen.presentation.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/from_login_to_cats"
+            app:destination="@id/catsFragment"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/catsFragment"
+        android:name="com.gis.featureusersimpl.presentation.ui.peoplescreen.CatsFragment"
+        android:label="CatsFragment"
+        tools:layout="@layout/fragment_cats" />
+
+</navigation>

@@ -4,7 +4,7 @@ import com.gis.repoimpl.domain.entitiy.Cat
 import io.reactivex.Completable
 import io.reactivex.Observable
 
-interface DataSource {
+interface CatsDataSource {
   fun observeCats(): Observable<List<Cat>>
 
   fun getNextCatsPage(page: Int, limit: Int): Observable<List<Cat>>

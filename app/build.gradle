@@ -6,7 +6,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion Version.compileSdkVersion
     defaultConfig {
-        applicationId "com.gis.jetpackplayground"
+        applicationId "com.gis.gisapptemplate"
         minSdkVersion Version.minSdk
         targetSdkVersion Version.targetSdk
         versionCode 1

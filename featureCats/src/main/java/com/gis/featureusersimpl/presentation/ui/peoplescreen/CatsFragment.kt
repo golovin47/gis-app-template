@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gis.featureusersimpl.R
-import com.gis.featureusersimpl.databinding.FragmentPeopleBinding
+import com.gis.featureusersimpl.databinding.FragmentCatsBinding
 import com.gis.featureusersimpl.presentation.ui.peoplescreen.CatsIntent.*
 import com.gis.utils.BaseView
 import com.gis.utils.domain.ImageLoader
@@ -33,7 +33,7 @@ class CatsFragment : Fragment(), BaseView<CatsState> {
   private val refreshCatsPublisher = PublishSubject.create<RefreshCats>()
   private val itemMovedPublisher = PublishSubject.create<ItemMoved>()
   private val itemDeletedPublisher = PublishSubject.create<ItemDeleted>()
-  private lateinit var binding: FragmentPeopleBinding
+  private lateinit var binding: FragmentCatsBinding
 
   private val vmCats: CatsViewModel by viewModel()
 
@@ -52,14 +52,13 @@ class CatsFragment : Fragment(), BaseView<CatsState> {
     return binding.root
   }
 
-
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
     handleStates()
   }
 
   private fun initBinding(inflater: LayoutInflater, container: ViewGroup?) {
-    binding = DataBindingUtil.inflate(inflater, R.layout.fragment_people, container, false)
+    binding = DataBindingUtil.inflate(inflater, R.layout.fragment_cats, container, false)
   }
 
   private fun initRecyclerView(context: Context) {

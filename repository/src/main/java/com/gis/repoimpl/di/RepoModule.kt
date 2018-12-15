@@ -1,13 +1,19 @@
 package com.gis.repoimpl.di
 
-import com.gis.repoimpl.data.local.datasource.LocalSource
+import android.content.Context.MODE_PRIVATE
+import com.gis.repoimpl.data.local.datasource.CatsLocalSource
+import com.gis.repoimpl.data.local.datasource.UserLocalSource
 import com.gis.repoimpl.data.local.db.GisAppTemplateDbProvider
 import com.gis.repoimpl.data.remote.api.GisAppTemplateApiProvider
-import com.gis.repoimpl.data.remote.datasource.RemoteSource
+import com.gis.repoimpl.data.remote.datasource.CatsRemoteSource
+import com.gis.repoimpl.data.remote.datasource.UserRemoteSource
 import com.gis.repoimpl.data.repository.CatsRepositoryImpl
-import com.gis.repoimpl.domain.datasource.DataSource
+import com.gis.repoimpl.data.repository.UserRepositoryImpl
+import com.gis.repoimpl.domain.datasource.CatsDataSource
+import com.gis.repoimpl.domain.datasource.UserDataSource
 import com.gis.repoimpl.domain.interactors.*
 import com.gis.repoimpl.domain.repository.CatsRepository
+import com.gis.repoimpl.domain.repository.UserRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module.module
 
@@ -17,18 +23,30 @@ val repoModule = module {
 
   single { GisAppTemplateApiProvider.createApi() }
 
-  single<DataSource>("local") { LocalSource(get()) }
+  single { androidContext().getSharedPreferences("sharedPrefs", MODE_PRIVATE) }
 
-  single<DataSource>("remote") { RemoteSource(get()) }
 
-  single<CatsRepository> {
-    CatsRepositoryImpl(
-      get("local"),
-      get("remote")
-    )
-  }
+  //User
+  single<UserDataSource>("local") { UserLocalSource(get()) }
 
-  //Interactors
+  single<UserDataSource>("remote") { UserRemoteSource() }
+
+  single<UserRepository> { UserRepositoryImpl(get("local"), get("remote")) }
+
+  factory { ObserveUserUseCase(get()) }
+
+  factory { SaveUserUseCase(get()) }
+
+  factory { RemoveUserUseCase(get()) }
+
+
+  //Cats
+  single<CatsDataSource>("local") { CatsLocalSource(get()) }
+
+  single<CatsDataSource>("remote") { CatsRemoteSource(get()) }
+
+  single<CatsRepository> { CatsRepositoryImpl(get("local"), get("remote")) }
+
   factory { ObserveCatsUseCase(get()) }
 
   factory { LoadNextCatsPageUseCase(get()) }

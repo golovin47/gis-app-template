@@ -14,15 +14,22 @@ class MainActivity : AppCompatActivity() {
 
   private lateinit var binding: ActivityMainBinding
   private var navigator: AppNavigator = get()
-  private val startStartScreenFeature: () -> Unit by inject(name = "startStartScreenFeature")
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+    initBinding()
     if (savedInstanceState == null) {
-      val mainNavController = (supportFragmentManager.findFragmentById(R.id.main_nav_host) as NavHostFragment).navController
-      navigator.setNavController(mainNavController)
-      startStartScreenFeature.invoke()
+      initNavController()
     }
+  }
+
+  private fun initBinding() {
+    binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+  }
+
+  private fun initNavController() {
+    val mainNavController =
+      (supportFragmentManager.findFragmentById(R.id.main_nav_host) as NavHostFragment).navController
+    navigator.setNavController(mainNavController)
   }
 }

@@ -48,6 +48,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':utils')
+    implementation project(':repository')
 
     implementation Deps.kotlinStdlib
     implementation Deps.androidKtx

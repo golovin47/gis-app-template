@@ -1,6 +1,8 @@
 package com.gis.navigation
 
+import android.os.Bundle
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 
 class AppNavigator {
 
@@ -10,14 +12,11 @@ class AppNavigator {
     this.navController = navController
   }
 
-  fun navigateToStart() {
-    navController.setGraph(R.navigation.start_screen_nav_graph)
+  fun navigateToLogin(actionId: Int, navOptions: NavOptions? = null) {
+    navController.navigate(actionId, null, navOptions)
   }
 
-  fun navigateToLogin() {
-  }
-
-  fun navigateToCats() {
-    navController.setGraph(R.navigation.cats_nav_graph)
+  fun navigateToCats(actionId: Int, args: Bundle? = null, navOptions: NavOptions? = null) {
+    navController.navigate(actionId, args, navOptions)
   }
 }

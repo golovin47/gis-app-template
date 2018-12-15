@@ -2,12 +2,12 @@ package com.gis.repoimpl.data.remote.datasource
 
 import com.gis.repoimpl.data.remote.api.GisAppTemplateApi
 import com.gis.repoimpl.data.remote.entity.CatR
-import com.gis.repoimpl.domain.datasource.DataSource
+import com.gis.repoimpl.domain.datasource.CatsDataSource
 import com.gis.repoimpl.domain.entitiy.Cat
 import io.reactivex.Completable
 import io.reactivex.Observable
 
-class RemoteSource(private val api: GisAppTemplateApi) : DataSource {
+class CatsRemoteSource(private val api: GisAppTemplateApi) : CatsDataSource {
 
   override fun observeCats(): Observable<List<Cat>> =
     throw UnsupportedOperationException("Remote data source doesn't support observeCats()")

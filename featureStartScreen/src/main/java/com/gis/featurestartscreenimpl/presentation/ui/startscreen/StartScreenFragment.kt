@@ -1,5 +1,6 @@
 package com.gis.featurestartscreenimpl.presentation.ui.startscreen
 
+import android.annotation.SuppressLint
 import android.graphics.drawable.Animatable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +11,13 @@ import androidx.fragment.app.Fragment
 import com.gis.featurestartscreenimpl.R
 import com.gis.featurestartscreenimpl.databinding.FragmentStartScreenBinding
 import com.gis.utils.BaseView
+import io.reactivex.Observable
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StartScreenFragment : Fragment(), BaseView<StartScreenState> {
 
   private lateinit var binding: FragmentStartScreenBinding
+  private val vmStartScreen: StartScreenViewModel by viewModel()
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -21,14 +25,25 @@ class StartScreenFragment : Fragment(), BaseView<StartScreenState> {
     savedInstanceState: Bundle?
   ): View? {
 
-    binding = DataBindingUtil.inflate(inflater, R.layout.fragment_start_screen, container, false)
-    (binding.ivStartScreenIcon.drawable as Animatable).start()
+    initBinding(inflater, container)
+    startAnimation()
+    initIntents()
 
     return binding.root
   }
 
+  private fun initBinding(inflater: LayoutInflater, container: ViewGroup?) {
+    binding = DataBindingUtil.inflate(inflater, R.layout.fragment_start_screen, container, false)
+  }
+
+  private fun startAnimation() {
+    (binding.ivStartScreenIcon.drawable as Animatable).start()
+  }
+
+  @SuppressLint("CheckResult")
   override fun initIntents() {
-    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    Observable.never<Any>()
+      .subscribe(vmStartScreen.viewIntentsConsumer())
   }
 
   override fun handleStates() {
@@ -38,6 +53,4 @@ class StartScreenFragment : Fragment(), BaseView<StartScreenState> {
   override fun render(state: StartScreenState) {
     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
   }
-
-
 }
