@@ -1,6 +1,5 @@
 package com.gis.navigation
 
-import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.NavOptions
 
@@ -12,11 +11,30 @@ class AppNavigator {
     this.navController = navController
   }
 
-  fun navigateToLogin(actionId: Int, navOptions: NavOptions? = null) {
-    navController.navigate(actionId, null, navOptions)
+  fun goToLoginFromStartScreen() {
+    val navOptions = NavOptions.Builder()
+      .setEnterAnim(R.anim.anim_fade_in)
+      .setExitAnim(R.anim.anim_fade_out)
+      .setPopUpTo(R.id.startScreenFragment, true)
+      .build()
+    navController.navigate(R.id.from_start_to_login, null, navOptions)
   }
 
-  fun navigateToCats(actionId: Int, args: Bundle? = null, navOptions: NavOptions? = null) {
-    navController.navigate(actionId, args, navOptions)
+  fun goToMainFromStartScreen() {
+    val navOptions = NavOptions.Builder()
+      .setEnterAnim(R.anim.anim_fade_in)
+      .setExitAnim(R.anim.anim_fade_out)
+      .setPopUpTo(R.id.startScreenFragment, true)
+      .build()
+    navController.navigate(R.id.from_start_to_cats, null, navOptions)
+  }
+
+  fun goToMainFromLogin() {
+    val navOptions = NavOptions.Builder()
+      .setEnterAnim(R.anim.anim_fade_in)
+      .setExitAnim(R.anim.anim_fade_out)
+      .setPopUpTo(R.id.loginFragment, true)
+      .build()
+    navController.navigate(R.id.from_login_to_cats, null, navOptions)
   }
 }

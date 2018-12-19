@@ -31,10 +31,7 @@ class CatsAdapter(
     }
 
   override fun areContentsTheSame(oldItem: CatsListItem, newItem: CatsListItem): Boolean =
-    when {
-      oldItem is CatDefaultItem && newItem is CatDefaultItem -> oldItem === newItem
-      else -> true
-    }
+    oldItem == newItem
 
 }), ItemTouchHelperAdapter {
 

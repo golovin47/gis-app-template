@@ -1,15 +1,13 @@
 package com.gis.navigation.di
 
-import com.gis.navigation.AppCoordinator
 import com.gis.navigation.AppNavigator
 import org.koin.dsl.module.module
 
 val navigationModule = module {
 
   single(createOnStart = true) { AppNavigator() }
-  single(createOnStart = true) { AppCoordinator(get()) }
 
-  factory(name = "fromStartToLogin") { { get<AppCoordinator>().goToLoginFromStartScreen() } }
-  factory(name = "fromStartToMain") { { get<AppCoordinator>().goToMainFromStartScreen() } }
-  factory(name = "fromLoginToMain") { { get<AppCoordinator>().goToMainFromLogin() } }
+  factory(name = "fromStartToLogin") { { get<AppNavigator>().goToLoginFromStartScreen() } }
+  factory(name = "fromStartToMain") { { get<AppNavigator>().goToMainFromStartScreen() } }
+  factory(name = "fromLoginToMain") { { get<AppNavigator>().goToMainFromLogin() } }
 }
