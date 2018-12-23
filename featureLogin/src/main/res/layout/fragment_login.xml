@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -12,41 +13,40 @@
 
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/login_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layoutDescription="@xml/login_motion_scene">
 
         <EditText
-            android:id="@+id/et_name"
+            android:id="@+id/etName"
             android:layout_width="match_parent"
             android:layout_height="@dimen/et_height"
-            android:layout_gravity="center"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:enabled="@{!loading}"
             android:hint="@string/et_name_hint"
-            android:singleLine="true" />
+            android:singleLine="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/btn_login"
+            android:id="@+id/btnLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/btn_login_vertical_margin"
+            android:enabled="@{!loading}"
             android:text="@string/sign_in"
-            android:textAllCaps="false"
-            android:visibility="@{loading ? View.INVISIBLE : View.VISIBLE}" />
+            android:textAllCaps="false" />
 
         <ProgressBar
-            android:id="@+id/pb_loading"
+            android:id="@+id/pbLoading"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/btn_login_vertical_margin"
-            android:elevation="2dp"
-            android:visibility="@{loading ? View.VISIBLE : View.INVISIBLE}" />
+            android:layout_height="wrap_content" />
 
-    </FrameLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
 </layout>

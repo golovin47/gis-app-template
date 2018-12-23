@@ -72,6 +72,9 @@ class LoginFragment : Fragment(), BaseView<LoginState> {
   override fun render(state: LoginState) {
     binding.loading = state.loading
 
+    if (state.loading) binding.loginRoot.transitionToEnd()
+    else binding.loginRoot.transitionToStart()
+
     if (state.error != null)
       Snackbar.make(view!!, state.error.message!!, Snackbar.LENGTH_SHORT).show()
   }
