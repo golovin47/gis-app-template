@@ -17,9 +17,7 @@ const val DEFAULT_ITEM = 0x001
 const val LOADING_ITEM = 0x002
 
 class CatsAdapter(
-  private val loadNextPagePublisher: Subject<CatsIntent.LoadNextPage>,
-  private val itemMovedPublisher: Subject<CatsIntent.ItemMoved>,
-  private val itemDeletedPublisher: Subject<CatsIntent.ItemDeleted>,
+  private val eventsPublisher: Subject<CatsIntent>,
   private val imageLoader: ImageLoader
 ) : ListAdapter<CatsListItem, RecyclerView.ViewHolder>(object :
   DiffUtil.ItemCallback<CatsListItem>() {
@@ -73,7 +71,7 @@ class CatsAdapter(
 
   override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
     if (shouldLoadNextPage(position)) {
-      loadNextPagePublisher.onNext(CatsIntent.LoadNextPage(++curPage))
+      eventsPublisher.onNext(CatsIntent.LoadNextPage(++curPage))
     }
 
     if (holder is CatsViewHolder)
@@ -81,11 +79,11 @@ class CatsAdapter(
   }
 
   override fun onItemMove(from: Int, to: Int) {
-    itemMovedPublisher.onNext(CatsIntent.ItemMoved(from, to))
+    eventsPublisher.onNext(CatsIntent.ItemMoved(from, to))
   }
 
   override fun onItemDismiss(position: Int) {
-    itemDeletedPublisher.onNext(CatsIntent.ItemDeleted(position))
+    eventsPublisher.onNext(CatsIntent.ItemDeleted(position))
   }
 
   private fun shouldLoadNextPage(position: Int): Boolean {

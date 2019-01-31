@@ -15,12 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gis.featurecats.R
 import com.gis.featurecats.databinding.FragmentCatsBinding
-import com.gis.featurecats.presentation.ui.catsscreen.CatsIntent.*
+import com.gis.featurecats.presentation.ui.catsscreen.CatsIntent.RefreshCats
+import com.gis.featurecats.presentation.ui.catsscreen.CatsIntent.SearchById
 import com.gis.utils.BaseView
 import com.gis.utils.domain.ImageLoader
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
 import io.reactivex.subjects.PublishSubject
 import org.koin.android.ext.android.get
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -28,14 +30,16 @@ import java.util.concurrent.TimeUnit
 
 class CatsFragment : Fragment(), BaseView<CatsState> {
 
-  private val loadNextPagePublisher = PublishSubject.create<LoadNextPage>()
-  private val searchByIdPublisher = PublishSubject.create<SearchById>()
-  private val refreshCatsPublisher = PublishSubject.create<RefreshCats>()
-  private val itemMovedPublisher = PublishSubject.create<ItemMoved>()
-  private val itemDeletedPublisher = PublishSubject.create<ItemDeleted>()
-  private lateinit var binding: FragmentCatsBinding
+  private val eventsPublisher = PublishSubject.create<CatsIntent>()
+  private lateinit var viewSubscriptions: Disposable
+  private var binding: FragmentCatsBinding? = null
 
   private val vmCats: CatsViewModel by viewModel()
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    handleStates()
+  }
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -49,12 +53,13 @@ class CatsFragment : Fragment(), BaseView<CatsState> {
     initSwipeRefresh()
     initIntents()
 
-    return binding.root
+    return binding!!.root
   }
 
-  override fun onActivityCreated(savedInstanceState: Bundle?) {
-    super.onActivityCreated(savedInstanceState)
-    handleStates()
+  override fun onDestroyView() {
+    binding = null
+    viewSubscriptions.dispose()
+    super.onDestroyView()
   }
 
   private fun initBinding(inflater: LayoutInflater, container: ViewGroup?) {
@@ -63,13 +68,8 @@ class CatsFragment : Fragment(), BaseView<CatsState> {
 
   private fun initRecyclerView(context: Context) {
     val imageLoader: ImageLoader = get()
-    val adapter = CatsAdapter(
-      loadNextPagePublisher,
-      itemMovedPublisher,
-      itemDeletedPublisher,
-      imageLoader
-    )
-    binding.rvPeople
+    val adapter = CatsAdapter(eventsPublisher, imageLoader)
+    binding!!.rvPeople
       .apply {
         layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         setAdapter(adapter)
@@ -84,41 +84,35 @@ class CatsFragment : Fragment(), BaseView<CatsState> {
   }
 
   private fun initToolbar() {
-    binding.tbPeople.inflateMenu(R.menu.menu_people)
-    (binding.tbPeople.menu.findItem(R.id.action_search).actionView as SearchView).setOnQueryTextListener(
+    binding!!.tbPeople.inflateMenu(R.menu.menu_people)
+    (binding!!.tbPeople.menu.findItem(R.id.action_search).actionView as SearchView).setOnQueryTextListener(
       object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String?): Boolean {
           return false
         }
 
         override fun onQueryTextChange(newText: String): Boolean {
-          searchByIdPublisher.onNext(SearchById(newText))
+          eventsPublisher.onNext(SearchById(newText))
           return false
         }
       })
   }
 
   private fun initSwipeRefresh() {
-    binding.srlRefreshPeople.setOnRefreshListener {
-      refreshCatsPublisher.onNext(RefreshCats)
+    binding!!.srlRefreshPeople.setOnRefreshListener {
+      eventsPublisher.onNext(RefreshCats)
     }
   }
 
   @SuppressLint("CheckResult")
   override fun initIntents() {
-    Observable.merge(
+    viewSubscriptions = Observable.merge(
       listOf(
-        loadNextPagePublisher,
+        eventsPublisher,
 
-        refreshCatsPublisher,
-
-        searchByIdPublisher
+        eventsPublisher.ofType(SearchById::class.java)
           .debounce(300, TimeUnit.MILLISECONDS, AndroidSchedulers.mainThread())
-          .distinctUntilChanged(),
-
-        itemMovedPublisher,
-
-        itemDeletedPublisher
+          .distinctUntilChanged()
       )
     ).subscribe(vmCats.viewIntentsConsumer())
   }
@@ -128,11 +122,11 @@ class CatsFragment : Fragment(), BaseView<CatsState> {
   }
 
   override fun render(state: CatsState) {
-    binding.srlRefreshPeople.isRefreshing = state.loading
+    binding!!.srlRefreshPeople.isRefreshing = state.loading
 
     if (state.error != null)
       Snackbar.make(view!!, state.error.message!!, Snackbar.LENGTH_SHORT).show()
 
-    (binding.rvPeople.adapter as CatsAdapter).submitList(state.cats)
+    (binding!!.rvPeople.adapter as CatsAdapter).submitList(state.cats)
   }
 }

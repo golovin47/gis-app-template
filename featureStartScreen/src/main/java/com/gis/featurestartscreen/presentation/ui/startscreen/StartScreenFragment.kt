@@ -16,7 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class StartScreenFragment : Fragment(), BaseView<StartScreenState> {
 
-  private lateinit var binding: FragmentStartScreenBinding
+  private var binding: FragmentStartScreenBinding? = null
   private val vmStartScreen: StartScreenViewModel by viewModel()
 
   override fun onCreateView(
@@ -29,7 +29,12 @@ class StartScreenFragment : Fragment(), BaseView<StartScreenState> {
     startAnimation()
     initIntents()
 
-    return binding.root
+    return binding!!.root
+  }
+
+  override fun onDestroyView() {
+    binding = null
+    super.onDestroyView()
   }
 
   private fun initBinding(inflater: LayoutInflater, container: ViewGroup?) {
@@ -37,7 +42,7 @@ class StartScreenFragment : Fragment(), BaseView<StartScreenState> {
   }
 
   private fun startAnimation() {
-    (binding.ivStartScreenIcon.drawable as Animatable).start()
+    (binding!!.ivStartScreenIcon.drawable as Animatable).start()
   }
 
   @SuppressLint("CheckResult")
